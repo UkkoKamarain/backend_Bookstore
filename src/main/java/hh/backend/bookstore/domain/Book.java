@@ -3,14 +3,14 @@ package hh.backend.bookstore.domain;
 public class Book {
     private String title;
     private String author;
-    private String publicationYear;
+    private int publicationYear;
     private String isbn;
-    private String price;
+    private double price;
 
     public Book() {
     }
 
-    public Book(String title, String author, String publicationYear, String isbn, String price) {
+    public Book(String title, String author, int publicationYear, String isbn, double price) {
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -34,11 +34,11 @@ public class Book {
         this.author = author;
     }
 
-    public String getPublicationYear() {
+    public int getPublicationYear() {
         return publicationYear;
     }
 
-    public void setPublicationYear(String publicationYear) {
+    public void setPublicationYear(int publicationYear) {
         this.publicationYear = publicationYear;
     }
 
@@ -50,11 +50,11 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
