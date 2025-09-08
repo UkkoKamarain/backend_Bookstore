@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import hh.backend.bookstore.domain.Book;
 import hh.backend.bookstore.domain.BookRepository;
@@ -16,6 +19,7 @@ public class BookController {
     @Autowired
     BookRepository bookRepository;
 
+    // http://localhost:8080/index
     @GetMapping("/index")
     public String getIndex(
         Model model
@@ -23,6 +27,7 @@ public class BookController {
         return "welcome"; // welcome.html
     }
 
+    // http://localhost:8080/booklist
     @GetMapping("/booklist")
     public String getBookList(
         Model model
@@ -30,5 +35,30 @@ public class BookController {
         List<Book> books = (List<Book>) bookRepository.findAll();
         model.addAttribute("books", books);
         return "booklist"; // booklist.html
+    }
+
+    // http://localhost:8080/addbook 
+    @GetMapping("/addbook")
+    public String getAddBook(
+        Model model
+    ) {
+        model.addAttribute("book", new Book());
+        return "addbook"; // addbook.html
+    }
+
+    @RequestMapping("/savebook")
+    public String reqSaveBook(
+        @ModelAttribute Book book
+    ) {
+        bookRepository.save(book);
+        return "redirect:/booklist"; // back to booklist
+    }
+
+    @RequestMapping("/deletebook/{id}")
+    public String reqDeleteBook(
+        @PathVariable("id") Long bookId
+    ) {
+        bookRepository.deleteById(bookId);
+        return "redirect:/booklist"; // stay on booklist
     }
 }

@@ -19,18 +19,18 @@ public class BookstoreApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bookstoreRunner(BookRepository repository) {
+	public CommandLineRunner bookstoreRunner(BookRepository bookRepository) {
 		return (args) -> {
 			log.info("Insert testing books");
 
 			// adding a some test books
-			repository.save(new Book(
+			bookRepository.save(new Book(
 					"TestBook1",
 					"TestAuthor1",
 					2025,
 					"TestIsbn1",
 					2.50));
-			repository.save(new Book(
+			bookRepository.save(new Book(
 					"TestBook2",
 					"TestAuthor1",
 					2024,
@@ -38,7 +38,7 @@ public class BookstoreApplication {
 					300.33));
 
 			log.info("Fetch all books");
-			for (Book b : repository.findAll()) {
+			for (Book b : bookRepository.findAll()) {
 				log.info(b.toString());
 			}
 		};

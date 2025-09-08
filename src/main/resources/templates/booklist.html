@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookstore - booklist</title>
+    <title>Bookstore - Booklist</title>
 </head>
 
 <body>
@@ -22,8 +22,10 @@
             <td th:text="${b.title}">title</td>
             <td th:text="${b.isbn}">isbn</td>
             <td th:text="${b.publicationYear}">year</td>
+            <td><a th:href="@{/deletebook/{id}(id=${b.id})}">Delete</a></td>
         </tr>
     </table>
+    <a href="/addbook">Add Book</a>
 
 </body>
 

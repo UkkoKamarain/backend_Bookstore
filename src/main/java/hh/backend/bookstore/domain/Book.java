@@ -15,9 +15,11 @@ public class Book {
     private double price;
 
     public Book() {
+        super();
     }
 
     public Book(String title, String author, int publicationYear, String isbn, double price) {
+        super();
         this.title = title;
         this.author = author;
         this.publicationYear = publicationYear;
@@ -65,13 +67,21 @@ public class Book {
         this.price = price;
     }
 
-    @Override
-    public String toString() {
-        return "Book [title=" + title +
-                ", author=" + author +
-                ", publicationYear=" + publicationYear +
-                ", isbn=" + isbn +
-                ", price=" + price + "]";
+    public Long getId() {
+        return id;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Book [id=" + id +
+                ", title=" + title +
+                ", author=" + author +
+                ", isbn=" + isbn +
+                ", publicationYear=" + publicationYear +
+                ", price=" + price + "]";
+    }
 }
