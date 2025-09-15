@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import hh.backend.bookstore.domain.Book;
 import hh.backend.bookstore.domain.BookRepository;
+import hh.backend.bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
@@ -70,4 +71,5 @@ public class BookController {
         bookRepository.deleteById(bookId);
         return "redirect:/booklist"; // stay on booklist
     }
+
 }
