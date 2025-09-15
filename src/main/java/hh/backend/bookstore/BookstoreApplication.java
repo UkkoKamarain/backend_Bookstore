@@ -25,13 +25,20 @@ public class BookstoreApplication {
 			BookRepository bookRepository, 
 			CategoryRepository categoryRepository
 		) {
+		// Creating categories for easier inserting
+		Category noCat = new Category("No category");
+		Category fantasyCat = new Category("Fantasy");
+		Category scienceCat = new Category("Science");
+		Category romanceCat = new Category("Romance");
+
 		return (args) -> {
 
 			log.info("Save some sample categories");
-			// adding some categories
-			categoryRepository.save(new Category("fantasy"));
-			categoryRepository.save(new Category("science"));
-			categoryRepository.save(new Category("romance"));
+			// adding sample categories
+			categoryRepository.save(noCat);
+			categoryRepository.save(fantasyCat);
+			categoryRepository.save(scienceCat);
+			categoryRepository.save(romanceCat);
 
 			log.info("Insert testing books");
 
@@ -41,13 +48,15 @@ public class BookstoreApplication {
 					"TestAuthor1",
 					2025,
 					"TestIsbn1",
-					2.50));
+					2.50,
+					fantasyCat));
 			bookRepository.save(new Book(
 					"TestBook2",
 					"TestAuthor1",
 					2024,
 					"TestIsbn2",
-					300.33));
+					300.33,
+					romanceCat));
 
 			log.info("Fetch all categories");
 			for (Category c : categoryRepository.findAll()) {

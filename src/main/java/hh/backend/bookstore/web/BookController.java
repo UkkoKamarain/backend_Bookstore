@@ -19,6 +19,8 @@ public class BookController {
 
     @Autowired
     BookRepository bookRepository;
+    @Autowired
+    CategoryRepository categoryRepository;
 
     // http://localhost:8080/index
     @GetMapping("/index")
@@ -43,6 +45,7 @@ public class BookController {
     public String getAddBook(
         Model model
     ) {
+        model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("book", new Book());
         return "addbook"; // addbook.html
     }
@@ -52,6 +55,7 @@ public class BookController {
         @PathVariable("id") Long bookId,
         Model model
     ) {
+        model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("editbook", bookRepository.findById(bookId));
         return "editbook"; // editbook.html
     }
