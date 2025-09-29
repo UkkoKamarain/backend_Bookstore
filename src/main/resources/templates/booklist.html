@@ -21,7 +21,7 @@
             <th>Year</th>
             <th>Category</th>
             <th></th>
-            <th sec:authorize="hasRole('ADMIN')"></th>
+            <th sec:authorize="hasAuthority('ADMIN')"></th>
         </tr>
         <tr th:each="b : ${books}">
             <td th:text="${b.author}">author</td>
@@ -30,7 +30,7 @@
             <td th:text="${b.publicationYear}">year</td>
             <td th:text="${b.category.name}">category</td>
             <td><a th:href="@{/editbook/{id}(id=${b.id})}" class="btn btn-outline-secondary">Edit</a></td>
-            <td sec:authorize="hasRole('ADMIN')">
+            <td sec:authorize="hasAuthority('ADMIN')">
                 <a th:href="@{/deletebook/{id}(id=${b.id})}" class="btn btn-danger">Delete</a>
             </td>
             

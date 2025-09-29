@@ -6,15 +6,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import hh.backend.bookstore.domain.Book;
-import hh.backend.bookstore.domain.BookRepository;
-import hh.backend.bookstore.domain.Category;
-import hh.backend.bookstore.domain.CategoryRepository;
+import hh.backend.bookstore.domain.*;
 
 @SpringBootApplication
 public class BookstoreApplication {
+
+    private final AppUserRepository appUserRepository;
 	private static final Logger log = LoggerFactory.getLogger(BookstoreApplication.class);
+
+    BookstoreApplication(AppUserRepository appUserRepository) {
+        this.appUserRepository = appUserRepository;
+    }
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
@@ -30,8 +32,14 @@ public class BookstoreApplication {
 		Category fantasyCat = new Category("Fantasy");
 		Category scienceCat = new Category("Science");
 		Category romanceCat = new Category("Romance");
+		AppUser user1 = new AppUser("user", "$2a$10$IiyD/u5KKXV6EVyZKETumONM7p5hqQvRqcfNNj/Z5513OS2E.ZCoC", "user@bookstore.fi", "USER");
+		AppUser user2 = new AppUser("admin", "$2a$10$1PKicp/C8HewhB8Ga/J./OjMz0A132x7GhfBcClyYOXAmdVW1HTQy", "admin@bookstore.fi", "ADMIN");
 
 		return (args) -> {
+
+			log.info("Insert users");
+			appUserRepository.save(user1);
+			appUserRepository.save(user2);
 
 			log.info("Save some sample categories");
 			// adding sample categories
