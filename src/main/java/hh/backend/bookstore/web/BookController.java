@@ -3,6 +3,7 @@ package hh.backend.bookstore.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import hh.backend.bookstore.domain.Book;
 import hh.backend.bookstore.domain.BookRepository;
 import hh.backend.bookstore.domain.CategoryRepository;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 public class BookController {
@@ -22,8 +25,15 @@ public class BookController {
     @Autowired
     CategoryRepository categoryRepository;
 
-    // http://localhost:8080/index
-    @GetMapping("/index")
+    // http://localhost:8080/login
+    @GetMapping("/login")
+    public String getLogin() {
+        return "login"; // login.html
+    }
+    
+
+    // http://localhost:8080/
+    @GetMapping("/")
     public String getIndex(
         Model model
     ) {
@@ -69,6 +79,7 @@ public class BookController {
     }
 
     @RequestMapping("/deletebook/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String reqDeleteBook(
         @PathVariable("id") Long bookId
     ) {
