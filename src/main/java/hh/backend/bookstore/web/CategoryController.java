@@ -40,7 +40,7 @@ public class CategoryController {
     }
 
     @RequestMapping("/savecategory")
-    public String reqSaveBook(
+    public String reqSaveCategory(
         @ModelAttribute Category category
     ) {
         categoryRepository.save(category);
